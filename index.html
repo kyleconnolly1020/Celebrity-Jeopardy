@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="include/bootstrap.min.css">
+    <script src="include/jquery-1.11.0.min.js"></script>
+    <script src="include/bootstrap.min.js"></script>
+    <style>
+        body { background:url(3840x2400.png) center center; }
+        .question{
+            height:100px;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 1.5em;
+            padding-top: 35px;
+            cursor: pointer;
+        }
+        .unanswered:hover, .demo {
+            background-color:#8ADF82;
+        }
+        .origdouble { text-decoration:line-through; color:rgba(0,0,0,0.3); }
+        .modal-dialog { width:900px; }
+        .modal-dialog img { text-align:center; }
+        .modal-header h4 { text-shadow: 1px 1px 3px white; }
+        .modal-footer { font-size:2em; }
+        #question { font-size:3em; }
+        .panel { background:rgba(255,255,255,0.4); }
+        .panel-default > .panel-heading { background:rgba(245,245,245,0.6); }
+        .panel-footer { text-align: center; font-size:1.5em; background:rgba(245,245,245,0.5); }
+        pre { background:none; border:none; font-size:.7em; }
+        pre.small { font-size:.4em; }
+        .player { display:none; margin:15px; border-bottom: 5px solid; }
+        .player.well { background-color: white; }
+        #player1 { border-bottom-color: #27D500; } .answered1 { background-color: #27D500; } /* green */
+        #player2 { border-bottom-color: #D50000; } .answered2 { background-color: #D50000; } /* red */
+        #player3 { border-bottom-color: #00D5CB; } .answered3 { background-color: #00D5CB; } /* turquoise */
+        #player4 { border-bottom-color: #0060D5; } .answered4 { background-color: #0060D5; } /* blue */
+        #player5 { border-bottom-color: #D5B200; } .answered5 { background-color: #D5B200; } /* ochre */
+        #player6 { border-bottom-color: #D200D5; } .answered6 { background-color: #D200D5; } /* violet */
+        #player7 { border-bottom-color: #D57900; } .answered7 { background-color: #D57900; } /* orange */
+        #player8 { border-bottom-color: #009A93; } .answered8 { background-color: #009A93; } /* dark turquoise */
+        #player9 { border-bottom-color: #EE8EFE; } .answered9 { background-color: #EE8EFE; } /* pink */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="panel panel-default">
+        <div class="panel-heading"></div>
+            <div class="panel-body" id="main-board"></div>
+            <div class="panel-footer">
+                <div id="player1" class="player col-md-2 well panel-body"><span id="playername1"></span><br /><span id="score1">0</span></div>
+                <div id="player2" class="player col-md-2 well panel-body"><span id="playername2"></span><br /><span id="score2">0</span></div>
+                <div id="player3" class="player col-md-2 well panel-body"><span id="playername3"></span><br /><span id="score3">0</span></div>
+                <div id="player4" class="player col-md-2 well panel-body"><span id="playername4"></span><br /><span id="score4">0</span></div>
+                <div id="player5" class="player col-md-2 well panel-body"><span id="playername5"></span><br /><span id="score5">0</span></div>
+                <div id="player6" class="player col-md-2 well panel-body"><span id="playername6"></span><br /><span id="score6">0</span></div>
+                <div id="player7" class="player col-md-2 well panel-body"><span id="playername7"></span><br /><span id="score7">0</span></div>
+                <div id="player8" class="player col-md-2 well panel-body"><span id="playername8"></span><br /><span id="score8">0</span></div>
+                <div id="player9" class="player col-md-2 well panel-body"><span id="playername9"></span><br /><span id="score9">0</span></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="question-modal" role="dialog" aria-labelledby="question-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                    <span class="pull-right" id="player"></span>
+                    <span id="currentquestion"></span> <span id="currentvalue"></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="question"></p>
+                </div>
+                <div class="modal-footer ">
+                    <div id="answers" class="text-left">
+                    </div>
+                </div>
+           </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+<audio src="include/think-music.mp3" type="audio/mp3"></audio>
+
+<script>
+var showmaster = true;  // true: a showmaster enters the answers with + and - (answers not displayed) // false: display answers in multiple choice mode
+boardfile = location.search.substr(1);
+if (!boardfile) boardfile = 'board.json';
+$(function(){
+    $.ajax({//ajax method to load the board.json and call the loadBoard() function on success
+        'async': false,
+        'global': false,
+        type:'GET',
+        dataType:'json',
+        url:boardfile,
+        success:function(data){
+            map = data;
+            loadBoard();
+        }
+    });
+    $('.unanswered').click(function(){//event bound to clicking on a tile. it grabs the data from the click event, populates the modal, fires the modal, and binds the answer method
+        var category = $(this).parent().data('category');
+        var question = $(this).data('question');
+        var isdouble = $(this).data('double');
+        var value = map[category].questions[question].value;
+        currenttileorigvalue = value;
+        if (isdouble) {
+            value = parseInt(prompt("          *** Double Jeopardy! ***\n\nHow many points do you want to risk?", value));
+        }
+        currenttilevalue = value;
+        currenttile = $(this);
+        var answers = $('#answers');
+        $('#currentquestion').empty().html(map[category].name)
+        if (isdouble) {
+            $('#currentvalue').empty().html('<span class="origdouble">' + currenttileorigvalue + '</span> ' + value );
+        } else {
+            $('#currentvalue').empty().html(value);
+        }
+        $('#question').empty().html(map[category].questions[question].question);
+        answers.empty();
+        $.each(map[category].questions[question].answers, function(i, answer){//loop over the answers and make buttons for each
+            if (showmaster) {
+                if (answer.correct) {
+                    answers.append(answer.text);
+                    $('.modal-footer').css('display', 'none');
+                }
+            } else {
+                answers.append(
+                    '<button class="btn btn-danger answer" ' +
+                    'data-category="'+category+'"' +
+                    'data-question="'+question+'"' +
+                    'data-value="'+value+'"' +
+                    'data-correct="'+answer.correct+'"' +
+                    '>'+ answer.text+'</button><br><br>'
+                )
+            }
+        });
+        $('#question-modal').modal('show');//fire modal
+        console.log(category, question);
+        console.log(map[category].questions[question]);
+        handleAnswer(); //bind answer onclick to newly created buttons
+    });
+    $(document).keypress(function(event){
+        keycode = event.which;
+        if (keycode >= 49 && keycode <= 57) { // 1..9
+            player = event.which - 48;
+            playerBuzzed(player);
+        } else if (keycode == 27 || keycode == 120) { // escape or x - hide question
+            hideQuestion();
+            setCurrentPlayer(0);
+        } else if (keycode == 43) { // +
+            rightAnswer();
+        } else if (keycode == 45) { // -
+            wrongAnswer();
+        } else if (keycode == 97) { // a
+            showAnswer();
+        } else if (keycode == 110) { // n
+            noAnswer();
+        } else if (keycode == 109) { // m
+            playMusic(); // requires include/think-music.mp3
+        } else if (keycode == 115) { // s
+            stopMusic();
+        } else if (keycode == 48) { // 0
+            setCurrentPlayer(0);  // if a player accidently buzzed
+        } else if (keycode == 100) { // d
+            demomode = 1 - demomode; // switch demoRunner on/off
+            demoRunner();
+        } else if (keycode == 0) { // function key etc.
+            alert('board and input locked');
+        } else {
+            console.log('unhandled key pressed, keycode ' + keycode);
+        }
+        return false;  // cancel any keypress events
+    });
+});
+var players = [];
+var currentplayer = 0;
+var score = [];
+var map;
+var currenttile;
+var currenttilevalue = 0;
+var currenttileorigvalue = 0;
+var demomode = 0;
+function playerBuzzed(player) {
+    if (! players[player]) {  // Player not registered yet, ask for name
+        var playername = prompt("Player " + player + ", please enter your name", "Player " + player);
+        if (playername != null) {
+            players[player] = playername;
+            score[player] = 0;
+            $('#playername' + player).text(playername);
+            $('#player' + player).css("display", "block");
+            // document.getElementById("demo").innerHTML = "Hello " + person + "! How are you today?";
+        }
+    } else {  // known player buzzed
+        // check if question is taken. if not, take it
+        if (currentplayer == 0) {
+            if ($('#question-modal').css("display") == "block") {  // only make player active if a question is displayed
+                setCurrentPlayer(player);
+            }
+        }
+    }
+}
+function setCurrentPlayer(player) {
+    if (player == 0) {
+        if (currentplayer != 0) {
+            $('#player' + currentplayer).css("background-color", "white");
+            $('.modal-header').css("background-color", "white");
+        }
+        playername = '';
+    } else {
+        playername = players[player];
+        bgcolor = $('#player' + player).css("border-bottom-color");
+        $('#player' + player).css("background-color", bgcolor);
+        $('.modal-header').css("background-color", bgcolor);
+    }
+    currentplayer = player;
+    $('#player').text(playername);
+    stopMusic();
+}
+function noAnswer() {
+    if (currenttilevalue == 0) { return; }
+    // mark tile as not answered
+    currenttile.empty().removeClass('unanswered').unbind().css('cursor','not-allowed');
+    hideQuestion();
+    setCurrentPlayer(0);
+}
+function rightAnswer() {
+    if (currentplayer == 0) { return; }
+    // mark tile as answered
+    currenttile.empty().removeClass('unanswered').unbind().css('cursor','not-allowed');
+    currenttile.addClass('answered' + currentplayer);
+    // add score for currentplayer
+    score[currentplayer] += currenttilevalue;
+    updateScore();
+    hideQuestion();
+    setCurrentPlayer(0);
+}
+function wrongAnswer() {
+    if (currentplayer == 0) { return; }
+    score[currentplayer] -= currenttilevalue;
+    currenttilevalue = currenttileorigvalue;
+    $('#currentvalue').html(currenttilevalue);
+    updateScore();
+    setCurrentPlayer(0);
+}
+function loadBoard(){//function that turns the board.json (loaded in the the map variable) into a jeopardy board
+    var board = $('#main-board');
+    var columns = map.length;
+    var column_width = parseInt(12/columns); //get the width/12 rounded down, to use the bootstrap column width appropriate for the number of categories
+    var tile_count = 0;
+    console.log(columns);
+    $.each(map, function(i,category){
+        //load category name
+        var header_class = 'text-center col-md-' + column_width;
+        if (i === 0 && columns % 2 != 0){ //if the number of columns is odd, offset the first one by one to center them
+            header_class += ' col-md-offset-1';
+        }
+        $('.panel-heading').append(
+            '<div class="'+header_class+'"><h4>'+category.name+'</h4></div>'
+        );
+        //add column
+        var div_class = 'category col-md-' + column_width;
+        if (i === 0 && columns % 2 != 0){
+            div_class += ' col-md-offset-1';
+        }
+        board.append('<div class="'+div_class+'" id="cat-'+i+'" data-category="'+i+'"></div>');
+        var column = $('#cat-'+i);
+        $.each(category.questions, function(n,question){
+            //add questions
+            tile_count ++;
+            double = 0;
+            if (question.double) { double = 1; }
+            column.append('<div class="well question unanswered" id="tile' + tile_count + '" data-question="'+n+'" data-double="' + double + '">'+question.value+'</div>')
+        });
+    });
+    $('.panel-heading').append('<div class="clearfix"></div>')
+}
+function showAnswer(){
+    $('.modal-footer').show(500);
+}
+function hideQuestion(){
+    $('#question-modal').modal('hide');
+    currenttile = null;
+    currenttilevalue = 0;
+}
+function updateScore(){
+    $('#score' + currentplayer).text(score[currentplayer]);
+}
+function handleAnswer(){
+    $('.answer').click(function(){// hide empty the tile, mike it unclickable, update the score if correct, and hide the modal
+        var tile= $('div[data-category="'+$(this).data('category')+'"]>[data-question="'+$(this).data('question')+'"]')[0];
+        $(tile).empty().removeClass('unanswered').unbind().css('cursor','not-allowed');
+        if ($(this).data('correct')){
+            score[currentplayer] += parseInt($(this).data('value'));
+            $(tile).addClass('answered' + currentplayer);
+        }
+        hideQuestion();
+        updateScore();
+        setCurrentPlayer(0);
+    })
+}
+function playMusic() {
+    $('audio')[0].play();
+}
+function stopMusic() {
+    $('audio')[0].pause(); // Stop playing
+    $('audio')[0].currentTime = 0; // Reset time
+}
+// Order of fields in demo mode. Made for a 5x5 field, needs adjustment to look good at other field sizes.
+var demo_order = [1,6,11,16,21,22,23,24,25,20,15,10,5,4,3,2,7,12,17,18,19,14,9,8,13,13,18,19,14,9,8,7,12,17,18,19,20,15,10,5,4,3, // spiral
+    2,1,6,11,16,21,22,17,12,7,2,3,8,13,18,23,24,19,14,9,4,5,10,15,20,25, // horicontal zigzag
+    24,23,22,21,16,17,18,19,20,15,14,13,12,11,6,7,8,9,10,5,4,3,2 // vertical zigzag
+    ];
+var demo_last_tile = -1;
+function demoRunner(){
+    $('#tile' + demo_order[demo_last_tile]).removeClass('demo');
+    demo_last_tile ++;
+    if (demo_last_tile > demo_order.length) demo_last_tile = 0;
+    if (demomode) {
+        $('#tile' + demo_order[demo_last_tile]).addClass('demo');
+        setTimeout(function(){ demoRunner(); }, 100);
+    }
+}
+</script>
+</body>
+</html>
+<!--
+vim:expandtab
+-->
