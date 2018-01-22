@@ -1,24 +1,6 @@
-CREATE TABLE jeopardy
-(
-	id int NOT NULL AUTO_INCREMENT,
-	contestant_name varchar(255) NOT NULL,
-    category_name varchar(255) NOT NULL,
-	earnings INTEGER(10) NOT NULL,
-    time_created DATETIME NOT NULL,
-	PRIMARY KEY (id)
-);
+use jeopardy_db;
+ INSERT INTO jeopardies (contestant_name, category_name, earnings, createdAt, updatedAt) VALUES 
+ ("Jason", "History", 200, now(), now()), 
+ ("Kyle", "Art", 100, now(), now());
 
-CREATE TABLE category
-(
-	id int NOT NULL AUTO_INCREMENT,
-	contestant_name varchar(255) NOT NULL,
-    category_name varchar(255) NOT NULL,
-	earnings INTEGER(10) NOT NULL,
-    time_created DATETIME NOT NULL,
-	PRIMARY KEY (id)
-);
-
-SELECT *FROM jeopardy;
-SELECT *FROM category;
-
-DROP TABLE jeopardy;
+select * from jeopardies;
