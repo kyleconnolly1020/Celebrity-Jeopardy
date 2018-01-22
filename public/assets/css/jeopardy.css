@@ -1,0 +1,27 @@
+.nav-wrapper {
+    background: blue;
+}
+
+.card-content {
+    text-align: center;
+}
+
+.card-image {
+    text-align: center;
+}
+
+.farrell-pic {
+    text-align: center;
+}
+
+#catSelect {
+    text-align: center;
+}
+
+.btn-large {
+    width: 90%;
+    height: 140px;
+}
+
+
+
