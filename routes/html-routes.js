@@ -8,9 +8,12 @@ var path = require("path");
 
 module.exports = function(app){
 
+  app.get("/test", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/test.html"));
+  });
 
     app.get("/", function(req, res) {
-        res.render("index");
+        res.render("../views/index.handlebars");
       });
 
       app.get("/category", function(req, res) {
@@ -30,24 +33,5 @@ module.exports = function(app){
       });
 
 
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 }
