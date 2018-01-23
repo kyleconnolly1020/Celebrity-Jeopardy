@@ -14,6 +14,13 @@ module.exports = function(app){
       });
 
 
+      app.get("/category", function(req, res) {
+        res.render("../views/category.handlebars");
+      });
+
+
+
+ 
 
 
 
