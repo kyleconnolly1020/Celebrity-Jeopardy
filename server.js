@@ -14,6 +14,7 @@ var PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
 var db = require("./models");
+var exphbs = require("express-handlebars");
 
 // Sets up the Express app to handle data parsing
 
@@ -21,6 +22,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+app.engine("handlebars", exphbs({defaultLayout:"main"}));
+app.set("view engine", "handlebars");
 
 
 // Set Handlebars.
