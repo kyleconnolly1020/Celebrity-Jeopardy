@@ -1,6 +1,5 @@
 
-{{!-- <script src="http://localhost:8080/js/game.js" type="text/javascript"></script> --}}
-
+<script src="http://localhost:8080/js/game.js" type="text/javascript"></script>
 <div id="categoryID" style="display: none;">{{questions}}</div>
 
 <div class="ques-container">
@@ -14,7 +13,7 @@
   <div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>$200 Question</h4>
-      <p>These dogs represent the teams of both Northeastern University and UConn</p>
+      <p id="question200"></p>
         <div class="row">
         <div class="input-field col s12">
           <input placeholder="Placeholder" id="answer" type="text" class="validate">
@@ -23,7 +22,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Submit</a>
+      <a href="#!" id="submitbutton" class="modal-action modal-close waves-effect waves-green btn-flat ">Submit</a>
     </div>
   </div>
 </div>
