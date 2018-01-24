@@ -21,6 +21,7 @@
 .btn-large {
     width: 90%;
     height: 140px;
+    background-color: blue;
 }
 
 .ques-container {
@@ -28,5 +29,7 @@
     text-align: center;
     margin-left: 250px;
 }
+
+
 
 
