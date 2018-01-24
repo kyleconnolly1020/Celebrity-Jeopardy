@@ -13,24 +13,24 @@ module.exports = function(app){
   });
 
     app.get("/", function(req, res) {
-        res.render("../views/index.handlebars");
+        res.render("index");
       });
 
       app.get("/category", function(req, res) {
-        res.render("../views/category.handlebars");
+        res.render("category");
       });
 
       app.get("/game/:category?", function(req, res) {
         var category = req.params.category;
-        res.render("../views/game.handlebars", {questions: category});
+        res.render("game", {questions: category});
       });
 
       app.get("/leaderboard", function(req, res) {
-        res.render("../views/leaderboard.handlebars");
+        res.render("leaderboard");
       });
 
       app.get("/question", function(req, res) {
-        res.render("../views/question.handlebars");
+        res.render("question");
       });
 
 
