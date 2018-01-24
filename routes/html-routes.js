@@ -20,8 +20,9 @@ module.exports = function(app){
         res.render("../views/category.handlebars");
       });
 
-      app.get("/game", function(req, res) {
-        res.render("../views/game.handlebars");
+      app.get("/game/:category?", function(req, res) {
+        var category = req.params.category;
+        res.render("../views/game.handlebars", {questions: category});
       });
 
       app.get("/leaderboard", function(req, res) {
