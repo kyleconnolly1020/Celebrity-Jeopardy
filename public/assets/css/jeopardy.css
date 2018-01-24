@@ -30,6 +30,21 @@
     margin-left: 250px;
 }
 
+.green {
+    text-align: center;
+}
+
+.card-content {
+    text-align: center;
+
+}
+
+.card .card-image {
+    position: relative;
+    width: 60%;
+    margin-left: 200px;
+}
+
 
 
 
