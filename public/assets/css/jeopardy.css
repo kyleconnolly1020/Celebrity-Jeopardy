@@ -42,9 +42,31 @@
 .card .card-image {
     position: relative;
     width: 60%;
-    margin-left: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.wavese-effect {
+    background: blue;
+}
 
+#see-score {
+    float: right;
+}
 
+#leadboard {
+    font-size: 40px;
+}
+
+.brand-logo {
+    margin-left: 20px;
+}
+
+.card-action {
+    color: blue;
+    font-size: 40px;
+}
+#play {
+    color: blue;
+}
 
