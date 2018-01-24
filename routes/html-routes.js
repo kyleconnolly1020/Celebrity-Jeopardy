@@ -33,6 +33,14 @@ module.exports = function(app){
         res.render("question");
       });
 
+      app.get("/contestant-info", function(req, res) {
+        res.render("contestant-info");
+      });
+
+      app.get("/credits", function(req, res) {
+        res.render("credits");
+      });
+
 
     
 }
