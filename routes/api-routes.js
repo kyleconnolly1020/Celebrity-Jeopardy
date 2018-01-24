@@ -24,6 +24,12 @@ module.exports = function (app) {
         // res.json(data);
       });
     }
+
+    app.post("/api/jeopardy", function(req, res) {
+      db.Jeopardy.create(req.body).then(function(dbJeopardy) {
+        res.json(Jeopardy);
+      });
+    });
    
   });
 
