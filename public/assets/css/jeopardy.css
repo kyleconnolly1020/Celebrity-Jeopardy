@@ -21,6 +21,7 @@
 .btn-large {
     width: 90%;
     height: 140px;
+    background-color: blue;
 }
 
 .ques-container {
@@ -29,4 +30,43 @@
     margin-left: 250px;
 }
 
+.green {
+    text-align: center;
+}
+
+.card-content {
+    text-align: center;
+
+}
+
+.card .card-image {
+    position: relative;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wavese-effect {
+    background: blue;
+}
+
+#see-score {
+    float: right;
+}
+
+#leadboard {
+    font-size: 40px;
+}
+
+.brand-logo {
+    margin-left: 20px;
+}
+
+.card-action {
+    color: blue;
+    font-size: 40px;
+}
+#play {
+    color: blue;
+}
 
