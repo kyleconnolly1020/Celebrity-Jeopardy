@@ -93,3 +93,7 @@ p {
     font-size: 30px;
 }
 
+.modal-trigger {
+    background: blue !important;
+}
+
