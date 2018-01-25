@@ -10,7 +10,8 @@ module.exports = function (app) {
     // findAll returns all entries for a table when used with no options
     if (!req.params.category) {
       db.Jeopardy.findAll({
-        limit: [10]
+        limit: [10],
+        order: [["earnings", "DESC"]]
       }).then(function (data) {
         // We have access to the todos as an argument inside of the callback function
         res.render("leaderboard", { leaderboard: data });
@@ -18,7 +19,8 @@ module.exports = function (app) {
     } else {
       db.Jeopardy.findAll({
         where: { category_name: req.params.category },
-        limit: [10]
+        limit: [10],
+        order: [["earnings", "DESC"]]
       }).then(function (data) {
         res.render("leaderboard", { leaderboard: data });
         // res.json(data);
@@ -32,5 +34,21 @@ module.exports = function (app) {
       res.json(dbJeopardy);
     });
   });
+
+  // PUT route for updating posts
+  app.put("/api/user", function(req, res) {
+    db.Jeopardy.update({
+      contestant_name: req.body.contestant_name
+    },
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(data) {
+        res.json(data);
+      });
+  });
+
+
 
 }

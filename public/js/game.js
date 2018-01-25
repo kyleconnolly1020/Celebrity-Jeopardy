@@ -3,6 +3,7 @@ $(function () {
     var questions = {};
     var categoryName = '';
     var queryURL = "http://jservice.io/api/clues?category=" + $("#categoryID").text();
+    var cateogoryName = "";
 
     $.get(queryURL, function (data, status) {
         console.log(data);
