@@ -2,7 +2,7 @@
 $(function () {
 
 
-    var audio = new Audio('../assets/img/jepr.mp3');
+    var audio = new Audio('/assets/audio/jepor.mp3');
 audio.play();
 
     
