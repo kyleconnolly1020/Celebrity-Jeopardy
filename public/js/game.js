@@ -1,4 +1,3 @@
-
 $(function () {
 
 
@@ -9,6 +8,7 @@ audio.play();
 
     var playerScore = 0;
     var questions = {};
+    var categoryName = '';
     var queryURL = "http://jservice.io/api/clues?category=" + $("#categoryID").text();
     var cateogoryName = "";
 
@@ -127,6 +127,12 @@ audio.play();
         var playerAnswer = $("#inputanswer6").val();
 
         checkAnswer(playerAnswer, questions.new200[1].answer, "#dbl-q-400");
+        if ($("#dbl-q-400").attr("correct") === "true") {
+            $("#dbl-q-400").css("background", "green");
+        }
+        else {
+            $("#dbl-q-400").css("background", "red");
+        }
         console.log(playerScore);
     });
 
@@ -186,20 +192,39 @@ audio.play();
         console.log(playerScore);
     });
 
-  
-    $("#see-score").click(function (e) {
-        e.preventDefault();
-        var playScore = {
-            category_name: cateogoryName,
-            earnings: playerScore
-        }
-     $.ajax("/api/score", {
-         type: "POST",
-         data: playScore
-     }).then(function (data) {
+    $("#see-score").on("click", function (event) {
+        event.preventDefault();
 
-         window.location.href = "/contestant-info/"+ data.id;
-     });
+        // Form validation
+        function validateForm() {
+            var isValid = true;
+            $(".btn-large").each(function () {
+                if (typeof $(this).attr("correct") === "undefined") {
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+
+        // If all required fields are filled
+        if (validateForm()) {
+
+            var playScore = {
+                category_name: cateogoryName,
+                earnings: playerScore
+            }
+
+            $.ajax("/api/score", {
+                type: "POST",
+                data: playScore
+            }).then(function (data) {
+
+                window.location.href = "/contestant-info/" + data.id;
+            });
+        }
+        else {
+            alert("Please Answer All Questions!");
+        }
     });
 
     function generateQuestions(data) {
@@ -228,11 +253,13 @@ audio.play();
             }
         }
 
+
         var new200 = TwoQuestions(questions200);
         var new400 = TwoQuestions(questions400);
         var new600 = TwoQuestions(questions600);
         var new800 = TwoQuestions(questions800);
         var new1000 = TwoQuestions(questions1000);
+
 
         var questions = {
             new200,
@@ -253,7 +280,7 @@ audio.play();
             var randomIndex = Math.floor(Math.random() * arrayOne.length);
             console.log("Array Length: " + arrayOne.length);
             console.log("Random Index Chosen: " + randomIndex);
-            arrayTwo.push(arrayOne.splice(randomIndex)[0]);
+            arrayTwo.push(arrayOne.splice(randomIndex, 1)[0]);
         }
         return arrayTwo;
     }
@@ -274,7 +301,20 @@ audio.play();
         var formattedAnswer = userAnswer.replace(/\s+/g, "").toLowerCase();
         var storedFormatted = storedAnswer.replace(/\s+/g, "").toLowerCase();
 
-        if (formattedAnswer === storedFormatted) {
+        if(formattedAnswer.includes("the")){
+            formattedAnswer.replace("the", "");
+        }
+        if(formattedAnswer.includes("of")){
+            formattedAnswer.replace("of", "");
+        }
+        if (storedFormatted.includes("the")){
+            storedFormatted.replace("the", "");
+        }
+        if (storedFormatted.includes("of")){
+            storedFormatted.replace("of", "");
+        }
+
+        if (formattedAnswer === storedFormatted.replace(/[^a-zA-Z ]/g, "")) {
             $(questionIdString).attr("correct", "true");
             var points = parseInt($(questionIdString).text());
             playerScore += points;
