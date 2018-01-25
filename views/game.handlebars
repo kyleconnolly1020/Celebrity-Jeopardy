@@ -1,6 +1,12 @@
 <script src="http://localhost:8080/js/game.js" type="text/javascript"></script>
 
 
+<script>var audio = new Audio('/assets/audio/theme.mp3');
+audio.play();
+</script>
+
+
+
 <div id="categoryID" style="display: none;">{{questions}}</div>
 
 <div class="ques-container">
@@ -10,7 +16,7 @@
   <div class="row">
     {{!-- modal trigger --}}
 
-    <a class="waves-effect waves-light btn-large modal-trigger card-panel blue darken-2" href="#modal1" id="q-200">200</a>
+    <a class="waves-effect waves-light btn-large modal-trigger" href="#modal1" id="q-200">200</a>
 
     <!-- Modal Structure -->
     <div id="modal1" class="modal modal-fixed-footer">
@@ -225,24 +231,142 @@
       <a id="sub-btn10" href="#!" class="submitAnswer modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
     </div>
   </div>
-</div>
-</div>
-</div>
-
-
-
-
-
-
+<br>
 <div id="see-score">
   <a class="card-panel red darken-2" href="../contestant-info">See your Score</a>
 </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
     
 </div>
 
 
 
 <script>
+
+$(document).ready(function(){
+       $("#sub-btn6").click(function () {
+        if($("#dbl-q-400").attr("correct") === "true"){
+            $("#dbl-q-400").css("background", "green");
+        }
+        else {
+            $("#dbl-q-400").css("background", "red");
+        }
+       });
+});
+
+$(document).ready(function(){
+       $("#sub-btn1").click(function () {
+        if($("#q-200").attr("correct") === "true"){
+            $("#q-200").css("background", "green");
+        }
+        else {
+            $("#q-200").css("background", "red");
+        }
+       });
+});
+
+$(document).ready(function(){
+       $("#sub-btn3").click(function () {
+        if($("#q-600").attr("correct") === "true"){
+            $("#q-600").css("background", "green");
+        }
+        else {
+            $("#q-600").css("background", "red");
+        }
+       });
+});
+
+$(document).ready(function(){
+       $("#sub-btn2").click(function () {
+        if($("#q-400").attr("correct") === "true"){
+            $("#q-400").css("background", "green");
+        }
+        else {
+            $("#q-400").css("background", "red");
+        }
+       });
+});
+
+
+
+$(document).ready(function(){
+       $("#sub-btn4").click(function () {
+        if($("#q-800").attr("correct") === "true"){
+            $("#q-800").css("background", "green");
+        }
+        else {
+            $("#q-800").css("background", "red");
+        }
+       });
+});
+
+$(document).ready(function(){
+       $("#sub-btn5").click(function () {
+        if($("#q-1000").attr("correct") === "true"){
+            $("#q-1000").css("background", "green");
+        }
+        else {
+            $("#q-1000").css("background", "red");
+        }
+       });
+});
+
+$(document).ready(function(){
+       $("#sub-btn7").click(function () {
+        if($("#dbl-q-800").attr("correct") === "true"){
+            $("#dbl-q-800").css("background", "green");
+        }
+        else {
+            $("#dbl-q-800").css("background", "red");
+        }
+       });
+});
+
+$(document).ready(function(){
+       $("#sub-btn8").click(function () {
+        if($("#dbl-q-1200").attr("correct") === "true"){
+            $("#dbl-q-1200").css("background", "green");
+        }
+        else {
+            $("#dbl-q-1200").css("background", "red");
+        }
+       });
+});
+        
+        $(document).ready(function(){
+       $("#sub-btn9").click(function () {
+        if($("#dbl-q-1600").attr("correct") === "true"){
+            $("#dbl-q-1600").css("background", "green");
+        }
+        else {
+            $("#dbl-q-1600").css("background", "red");
+        }
+       });
+});
+
+$(document).ready(function(){
+       $("#sub-btn10").click(function () {
+        if($("#dbl-q-2000").attr("correct") === "true"){
+            $("#dbl-q-2000").css("background", "green");
+        }
+        else {
+            $("#dbl-q-2000").css("background", "red");
+        }
+       });
+});
+
+
+
   $(document).ready(function () {
     $('#modal1').modal();
     $("#sub-btn1").click(function () {
