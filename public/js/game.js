@@ -7,6 +7,36 @@ $(function () {
         console.log(questions);
     $("#question200").text(questions.new200[0].question);
     });
+
+
+
+    // Question validations
+
+var count = 0;
+$('#modal1').modal();
+$("#submitbutton").click(function () {
+    var text = $("#answer1").val().trim();
+    var answer = $("#q-200").data("value").trim();
+    answer = answer.replace(/\s+/g, "").toLowerCase();
+    var value = $("#q-200").val();
+    console.log("worked" + text);
+    console.log("worked" + answer);
+    console.log(value);
+    $("#q-200").removeClass("modal-trigger");
+    if (text === answer) {
+        console.log("if working");
+        count += parseInt($("#q-200").val());
+        console.log(count);
+    }
+    
+
+})
+
+
+// the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    window.onbeforeunload = function() {
+return "submit";
+}
     
 });
 
