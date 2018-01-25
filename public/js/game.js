@@ -1,4 +1,6 @@
+
 $(function () {
+
     var playerScore = 0;
     var questions = {};
     var categoryName = '';
