@@ -1,10 +1,7 @@
+
+
 $(function () {
 
-
-    var audio = new Audio('../assets/img/jepr.mp3');
-audio.play();
-
-    
 
     var playerScore = 0;
     var questions = {};
