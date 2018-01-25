@@ -25,12 +25,29 @@ module.exports = function (app) {
       });
     }
 
-    app.post("/api/jeopardy", function(req, res) {
-      db.Jeopardy.create(req.body).then(function(dbJeopardy) {
-        res.json(Jeopardy);
-      });
-    });
-   
   });
+
+  app.post("/api/score", function(req, res) {
+    db.Jeopardy.create(req.body).then(function(dbJeopardy) {
+      res.json(dbJeopardy);
+      // res.redirect("/")
+    });
+  });
+
+  // PUT route for updating posts
+  app.put("/api/user", function(req, res) {
+    db.Jeopardy.update({
+      contestant_name: req.body.contestant_name
+    },
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(data) {
+        res.json(data);
+      });
+  });
+
+
 
 }
