@@ -67,8 +67,10 @@
     background-color: blue;
     font-size: 40px;
 }
-#play {
-    color: blue;
+.jeopardyButton {
+    color:#0b24fb !important;
+    font-size: 50px;
+    font-style: bold;
 }
 
 .new-item {
@@ -91,5 +93,13 @@ h2 {
 
 p {
     font-size: 30px;
+}
+
+.modal-trigger {
+    background: blue !important;
+}
+ 
+.categoryButton {
+    background: blue !important;
 }
 
