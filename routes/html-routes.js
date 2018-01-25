@@ -3,6 +3,7 @@
 // Dependencies
 
 var path = require("path");
+var db = require("../models");
 
 // Routes 
 
@@ -33,8 +34,19 @@ module.exports = function(app){
         res.render("question");
       });
 
-      app.get("/contestant-info", function(req, res) {
-        res.render("contestant-info");
+      app.get("/contestant-info/:id?", function(req, res) {
+        db.Jeopardy.findOne({
+          where: {
+            id: req.params.id
+          }
+        }).then(function(data){
+          // res.json(data);
+          var hbData = {
+            hbData: data
+          };
+          res.render("contestant-info", hbData);
+        })
+        
       });
 
       app.get("/credits", function(req, res) {

@@ -3,13 +3,14 @@ $(function () {
     var playerScore = 0;
     var questions = {};
     var queryURL = "http://jservice.io/api/clues?category=" + $("#categoryID").text();
+    var cateogoryName = "";
 
     $.get(queryURL, function (data, status) {
         console.log(data);
         questions = generateQuestions(data);
         console.log(questions);
 
-        var cateogoryName = data[0].category.title;
+        cateogoryName = data[0].category.title;
         var categoryNameCapital = uppercase(cateogoryName);
 
         //Category Header
@@ -169,6 +170,22 @@ $(function () {
 
         checkAnswer(playerAnswer, questions.new1000[1].answer, "#dbl-q-2000");
         console.log(playerScore);
+    });
+
+  
+    $("#see-score").click(function (e) {
+        e.preventDefault();
+        var playScore = {
+            category_name: cateogoryName,
+            earnings: playerScore
+        }
+     $.ajax("/api/score", {
+         type: "POST",
+         data: playScore
+     }).then(function (data) {
+
+         window.location.href = "/contestant-info/"+ data.id;
+     });
     });
 
     function generateQuestions(data) {
