@@ -1,13 +1,10 @@
 
-
 $(function () {
-
 
     var playerScore = 0;
     var questions = {};
     var categoryName = '';
     var queryURL = "http://jservice.io/api/clues?category=" + $("#categoryID").text();
-    var cateogoryName = "";
 
     $.get(queryURL, function (data, status) {
         console.log(data);
@@ -48,9 +45,6 @@ $(function () {
 
         checkAnswer(playerAnswer, questions.new200[0].answer, "#q-200");
         console.log(playerScore);
-        console.log(playerAnswer);
-        
-        
     });
 
     $("#sub-btn2").click(function () {
@@ -104,10 +98,6 @@ $(function () {
         //and adds the point value to the user's score (if they got it correct)
 
         var playerAnswer = $("#inputanswer5").val();
-
-
-        // When submit button is clicked, check the answer, if correct turn green, if false turn red
-
 
         checkAnswer(playerAnswer, questions.new1000[0].answer, "#q-1000");
         console.log(playerScore);
