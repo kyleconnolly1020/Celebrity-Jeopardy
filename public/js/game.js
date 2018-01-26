@@ -4,7 +4,7 @@ $(function () {
     var playerScore = 0;
     var questions = {};
     var categoryName = '';
-    var queryURL = "http://jservice.io/api/clues?category=" + $("#categoryID").text();
+    var queryURL = "https://jservice.io/api/clues?category=" + $("#categoryID").text();
 
     $.get(queryURL, function (data, status) {
         console.log(data);
