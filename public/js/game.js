@@ -195,7 +195,9 @@ $(function () {
 
         // If all required fields are filled
         if (validateForm()) {
-
+            window.onbeforeunload = function () {
+                return;
+            }
             var playScore = {
                 category_name: cateogoryName,
                 earnings: playerScore

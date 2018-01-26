@@ -2,7 +2,7 @@
 
 
 <script>var audio = new Audio('/assets/audio/theme.mp3');
-audio.play();
+  audio.play();
 </script>
 
 
@@ -209,7 +209,7 @@ audio.play();
       <a id="sub-btn9" href="#!" class="submitAnswer modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
     </div>
   </div>
-  
+
   <div class="row">
 
     <a class="waves-effect waves-light btn-large modal-trigger" href="#modal10" id="dbl-q-2000">2000</a>
@@ -231,10 +231,10 @@ audio.play();
       <a id="sub-btn10" href="#!" class="submitAnswer modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
     </div>
   </div>
-<br>
-<div id="see-score">
-  <a class="card-panel red darken-2" href="../contestant-info">See your Score</a>
-</div>
+  <br>
+  <div id="see-score">
+    <a class="card-panel red darken-2" href="../contestant-info">See your Score</a>
+  </div>
 
 </div>
 </div>
@@ -246,142 +246,128 @@ audio.play();
 
 
 
-    
+
 </div>
 
 
 
 <script>
 
-$(document).ready(function(){
-       $("#sub-btn6").click(function () {
-        if($("#dbl-q-400").attr("correct") === "true"){
-            $("#dbl-q-400").css("background", "green");
-        }
-        else {
-            $("#dbl-q-400").css("background", "red");
-        }
-       });
-});
-
-$(document).ready(function(){
-       $("#sub-btn1").click(function () {
-        if($("#q-200").attr("correct") === "true"){
-            $("#q-200").css("background", "green");
-        }
-        else {
-            $("#q-200").css("background", "red");
-        }
-       });
-});
-
-$(document).ready(function(){
-       $("#sub-btn3").click(function () {
-        if($("#q-600").attr("correct") === "true"){
-            $("#q-600").css("background", "green");
-        }
-        else {
-            $("#q-600").css("background", "red");
-        }
-       });
-});
-
-$(document).ready(function(){
-       $("#sub-btn2").click(function () {
-        if($("#q-400").attr("correct") === "true"){
-            $("#q-400").css("background", "green");
-        }
-        else {
-            $("#q-400").css("background", "red");
-        }
-       });
-});
-
-
-
-$(document).ready(function(){
-       $("#sub-btn4").click(function () {
-        if($("#q-800").attr("correct") === "true"){
-            $("#q-800").css("background", "green");
-        }
-        else {
-            $("#q-800").css("background", "red");
-        }
-       });
-});
-
-$(document).ready(function(){
-       $("#sub-btn5").click(function () {
-        if($("#q-1000").attr("correct") === "true"){
-            $("#q-1000").css("background", "green");
-        }
-        else {
-            $("#q-1000").css("background", "red");
-        }
-       });
-});
-
-$(document).ready(function(){
-       $("#sub-btn7").click(function () {
-        if($("#dbl-q-800").attr("correct") === "true"){
-            $("#dbl-q-800").css("background", "green");
-        }
-        else {
-            $("#dbl-q-800").css("background", "red");
-        }
-       });
-});
-
-$(document).ready(function(){
-       $("#sub-btn8").click(function () {
-        if($("#dbl-q-1200").attr("correct") === "true"){
-            $("#dbl-q-1200").css("background", "green");
-        }
-        else {
-            $("#dbl-q-1200").css("background", "red");
-        }
-       });
-});
-        
-        $(document).ready(function(){
-       $("#sub-btn9").click(function () {
-        if($("#dbl-q-1600").attr("correct") === "true"){
-            $("#dbl-q-1600").css("background", "green");
-        }
-        else {
-            $("#dbl-q-1600").css("background", "red");
-        }
-       });
-});
-
-$(document).ready(function(){
-       $("#sub-btn10").click(function () {
-        if($("#dbl-q-2000").attr("correct") === "true"){
-            $("#dbl-q-2000").css("background", "green");
-        }
-        else {
-            $("#dbl-q-2000").css("background", "red");
-        }
-       });
-});
-
-
+  $(document).ready(function () {
+    $("#sub-btn6").click(function () {
+      if ($("#dbl-q-400").attr("correct") === "true") {
+        $("#dbl-q-400").css("background", "green");
+      }
+      else {
+        $("#dbl-q-400").css("background", "red");
+      }
+    });
+  });
 
   $(document).ready(function () {
     $('#modal1').modal();
     $("#sub-btn1").click(function () {
-      var text = $("#modal1").text();
-      //console.log("worked" + text);
+
       $("#q-200").removeClass("modal-trigger");
-
+      if ($("#q-200").attr("correct") === "true") {
+        $("#q-200").css("background", "green");
+      }
+      else {
+        $("#q-200").css("background", "red");
+      }
     });
-
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    window.onbeforeunload = function () {
-      return;
-    }
-
   });
+
+  $(document).ready(function () {
+    $("#sub-btn3").click(function () {
+      if ($("#q-600").attr("correct") === "true") {
+        $("#q-600").css("background", "green");
+      }
+      else {
+        $("#q-600").css("background", "red");
+      }
+    });
+  });
+
+  $(document).ready(function () {
+    $("#sub-btn2").click(function () {
+      if ($("#q-400").attr("correct") === "true") {
+        $("#q-400").css("background", "green");
+      }
+      else {
+        $("#q-400").css("background", "red");
+      }
+    });
+  });
+
+
+
+  $(document).ready(function () {
+    $("#sub-btn4").click(function () {
+      if ($("#q-800").attr("correct") === "true") {
+        $("#q-800").css("background", "green");
+      }
+      else {
+        $("#q-800").css("background", "red");
+      }
+    });
+  });
+
+  $(document).ready(function () {
+    $("#sub-btn5").click(function () {
+      if ($("#q-1000").attr("correct") === "true") {
+        $("#q-1000").css("background", "green");
+      }
+      else {
+        $("#q-1000").css("background", "red");
+      }
+    });
+  });
+
+  $(document).ready(function () {
+    $("#sub-btn7").click(function () {
+      if ($("#dbl-q-800").attr("correct") === "true") {
+        $("#dbl-q-800").css("background", "green");
+      }
+      else {
+        $("#dbl-q-800").css("background", "red");
+      }
+    });
+  });
+
+  $(document).ready(function () {
+    $("#sub-btn8").click(function () {
+      if ($("#dbl-q-1200").attr("correct") === "true") {
+        $("#dbl-q-1200").css("background", "green");
+      }
+      else {
+        $("#dbl-q-1200").css("background", "red");
+      }
+    });
+  });
+
+  $(document).ready(function () {
+    $("#sub-btn9").click(function () {
+      if ($("#dbl-q-1600").attr("correct") === "true") {
+        $("#dbl-q-1600").css("background", "green");
+      }
+      else {
+        $("#dbl-q-1600").css("background", "red");
+      }
+    });
+  });
+
+  $(document).ready(function () {
+    $("#sub-btn10").click(function () {
+      if ($("#dbl-q-2000").attr("correct") === "true") {
+        $("#dbl-q-2000").css("background", "green");
+      }
+      else {
+        $("#dbl-q-2000").css("background", "red");
+      }
+    });
+  });
+
 
   $(document).ready(function () {
     $('#modal2').modal();
@@ -527,7 +513,6 @@ $(document).ready(function(){
 
     });
 
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
     window.onbeforeunload = function () {
       return "";
     }
