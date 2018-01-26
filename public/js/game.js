@@ -7,7 +7,7 @@ $(function () {
     var queryURL = "https://jservice.io/api/clues?category=" + $("#categoryID").text();
 
     $.get(queryURL, function (data, status) {
-        console.log(data);
+        // console.log(data);
         questions = generateQuestions(data);
         console.log(questions);
 
@@ -265,8 +265,8 @@ $(function () {
         var arrayTwo = [];
         for (i = 0; i < 2; i++) {
             var randomIndex = Math.floor(Math.random() * arrayOne.length);
-            console.log("Array Length: " + arrayOne.length);
-            console.log("Random Index Chosen: " + randomIndex);
+            // console.log("Array Length: " + arrayOne.length);
+            // console.log("Random Index Chosen: " + randomIndex);
             arrayTwo.push(arrayOne.splice(randomIndex, 1)[0]);
         }
         return arrayTwo;
@@ -284,24 +284,36 @@ $(function () {
 
 
     function checkAnswer(userAnswer, storedAnswer, questionIdString) {
-
+        // console.log(userAnswer);
+        // console.log(storedAnswer);
         var formattedAnswer = userAnswer.replace(/\s+/g, "").toLowerCase();
         var storedFormatted = storedAnswer.replace(/\s+/g, "").toLowerCase();
-
+        // console.log(formattedAnswer);
+        // console.log(storedFormatted);
         if(formattedAnswer.includes("the")){
-            formattedAnswer.replace("the", "");
+            formattedAnswer = formattedAnswer.replace("the", "");
         }
         if(formattedAnswer.includes("of")){
-            formattedAnswer.replace("of", "");
+            formattedAnswer = formattedAnswer.replace("of", "");
         }
         if (storedFormatted.includes("the")){
-            storedFormatted.replace("the", "");
+            storedFormatted = storedFormatted.replace("the", "");
         }
         if (storedFormatted.includes("of")){
-            storedFormatted.replace("of", "");
+            storedFormatted = storedFormatted.replace("of", "");
+        }
+        if (storedFormatted.includes("<i>")){
+            storedFormatted = storedFormatted.replace("<i>", "");
+        }
+        if (storedFormatted.includes("</i>")) {
+            storedFormatted = storedFormatted.replace("</i>", "");
         }
 
-        if (formattedAnswer === storedFormatted.replace(/[^a-zA-Z ]/g, "")) {
+        // console.log(formattedAnswer);
+        // console.log(storedFormatted);
+        var storedFormatted = storedFormatted.replace(/[^a-zA-Z_0-9-]/g, "");
+        // console.log(storedFormatted);
+        if (formattedAnswer === storedFormatted) {
             $(questionIdString).attr("correct", "true");
             var points = parseInt($(questionIdString).text());
             playerScore += points;
@@ -312,5 +324,6 @@ $(function () {
             $(questionIdString).attr("correct", "false");
         }
     }
+    
 
 });
