@@ -1,5 +1,6 @@
+
 <div class="tableAreaLeaderboard">
-    <table style="width:65%; margin-left: auto; margin-right: auto">
+    <table id="leaderboardTable" style="width:65%; margin-left: auto; margin-right: auto">
         <tr style="text-decoration: underline">
             <th>Name</th>
             <th>Category</th>
@@ -7,7 +8,7 @@
         </tr>
 
         {{#each leaderboard}}
-        <tr style="border-bottom: 1pt solid black">
+        <tr style="border-bottom: 1pt solid rgba(255, 255, 255, 0.884)">
             <td>{{contestant_name}}</td>
             <td>{{category_name}}</td>
             <td>{{earnings}}</td>
@@ -18,9 +19,9 @@
 
 <br>
 <br>
-<div class="categoryButton">
+<div id="pickCategory" class="categoryButton">
     <h4 style="text-align: center">
-        <strong>Select Leaderboard</strong>
+        <strong id="leaderboardPrompt">Select Leaderboard</strong>
     </h4>
     <div class="input-field col s12" style="text-align: center;">
         <select name="menu" onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO" class="chosen-select"
@@ -42,6 +43,7 @@
         </select>
     </div>
 </div>
+
 
 
 <script type="text/javascript">
