@@ -1,10 +1,12 @@
 body {
-    background: lightblue;
+    background-image: url('https://media.giphy.com/media/4OoRez1xBvyz6/giphy.gif');
+    background-size: cover;
+    background-position: center;
 }
 
 
 .nav-wrapper {
-    background: blue;
+    background:rgb(2, 41, 189);
 }
 
 .card-content {
@@ -21,6 +23,7 @@ body {
 
 #catSelect {
     text-align: center;
+    color: rgba(255, 255, 255, 0.884);
 }
 
 .btn-large {
@@ -51,7 +54,7 @@ body {
     margin-right: auto;
 }
 
-.wavese-effect {
+.waves-effect {
     background: blue;
 }
 
@@ -66,10 +69,23 @@ body {
 
 .brand-logo {
     margin-left: 20px;
+    font-style: italic;
+    text-shadow: 2px 2px rgb(0, 0, 78);
+}
+
+#categoryNav, #leaderboardNav, #creditsNav {
+    font-style: italic;
+    text-shadow: 2px 2px rgb(0, 0, 78);
+}
+
+.fadeButton { 
+    text-shadow: 3px 3px rgb(0, 0, 78);
+    text-align: center;
+    line-height: 3em;
 }
 
 .card-action {
-    background-color: blue;
+    background-color: rgb(7, 7, 180);
     font-size: 40px;
 }
 .jeopardyButton {
@@ -112,6 +128,7 @@ p {
 .card {
     background: lightblue !important;
     height: 100%;
+
 }
 
 .btn-large {
@@ -121,4 +138,66 @@ p {
 
 }
 
+#welcomeMessage {
+    color: #039be5;
+    text-shadow: .5px .5px white;
+    font-style: oblique;
+}
 
+#playText {
+    color: #039be5 !important;
+    text-shadow: 2px 2px rgb(150, 207, 253);
+}
+
+#homeImage {
+    padding-top: 50px;
+}
+
+#magazines, #art, #sports, #movies, #inthenews, #movies, #music, #statecapitals, #animals {
+    line-height: 120px;
+}
+
+#leaderboardTable {
+    color: rgba(255, 255, 255, 0.884);
+}
+
+#pickCategory {
+    background: transparent !important;
+    padding-bottom: 50px;
+}
+
+#leaderboardPrompt {
+    color: #039be5 !important;
+    
+}
+
+#dbljeop {
+    color: rgba(255, 255, 255, 0.884);
+}
+
+#submitscorebutton {
+    background: #039be5 !important;
+    border-radius: 10px;
+}
+
+#categoryHeader {
+    color:  rgba(255, 255, 255, 0.884);
+}
+
+#contestantInfoCard {
+    background: transparent !important;
+}
+
+#nameEntry{
+    background: grey; 
+    color: black;
+    border-radius: 10px;
+}
+
+#authors {
+    color:  rgba(255, 255, 255, 0.884);
+}
+
+#moneyDisplay {
+    color: rgba(255, 255, 255, 0.884) !important;
+}

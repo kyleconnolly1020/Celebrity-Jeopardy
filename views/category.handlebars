@@ -1,41 +1,62 @@
-<script>var audio = new Audio('/assets/audio/boardfill.mp3');
-audio.play();</script>
-
 <div class="category-container">
-<h1 id="catSelect">Today's Categories</h1>
+    <h1 id="catSelect">Today's Categories</h1>
 
-<div class="row">
-    <div class="col s3 ">
-<a categoryid="780" class="categoryButton waves-effect waves-light btn-large" value="americanhistory" href="game/780">American History</a></div>
-<div class="col s3 ">
-<a categoryid="752" class="categoryButton waves-effect waves-light btn-large" value="magazines" href="game/752">Magazines</a></div>
-<div class="col s3 ">
-<a categoryid="1559" class="categoryButton waves-effect waves-light btn-large" value="art" href="game/1559">Art</a></div>
-<div class="col s3 ">
-<a categoryid="42" class="categoryButton waves-effect waves-light btn-large" value="sports" href="game/42">Sports</a></div>
-</div>
+    <div class="row">
+        <div class="col s3 ">
+            <a style="display: none;" style="display: none;" categoryid="780" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="americanhistory" href="game/780">American History</a>
+        </div>
+        <div class="col s3 ">
+            <a id="magazines" style="display: none;" categoryid="752" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="magazines" href="game/752">Magazines</a>
+        </div>
+        <div class="col s3 ">
+            <a id="art" style="display: none;" categoryid="1559" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="art" href="game/1559">Art</a>
+        </div>
+        <div class="col s3 ">
+            <a id="sports" style="display: none;" categoryid="42" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="sports" href="game/42">Sports</a>
+        </div>
+    </div>
 
-<div class="row">
-<div class="col s3 ">
-<a categoryid="428" class="categoryButton waves-effect waves-light btn-large" value="inthenews" href="game/428">In the News</a></div>
-<div class="col s3 ">
-<a categoryid="309" class="categoryButton waves-effect waves-light btn-large" value="movies" href="game/309">Movies</a></div>
-<div class="col s3 ">
-<a categoryid="65" class="categoryButton waves-effect waves-light btn-large" value="music" href="game/65">Music</a></div>
-<div class="col s3 ">
-<a categoryid="253" class="categoryButton waves-effect waves-light btn-large" value="foodanddrink" href="game/253">Food and Drink</a></div>
-</div>
+    <div class="row">
+        <div class="col s3 ">
+            <a id="inthenews" style="display: none;" categoryid="428" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="inthenews" href="game/428">In the News</a>
+        </div>
+        <div class="col s3 ">
+            <a id="movies" style="display: none;" categoryid="309" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="movies" href="game/309">Movies</a>
+        </div>
+        <div class="col s3 ">
+            <a id="music" style="display: none;" categoryid="65" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="music" href="game/65">Music</a>
+        </div>
+        <div class="col s3 ">
+            <a style="display: none;" categoryid="253" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="foodanddrink" href="game/253">Food and Drink</a>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col s3 ">
-<a categoryid="218" class="categoryButton waves-effect waves-light btn-large" value="scienceandnature" href="game/218">Science and Nature</a></div>
-<div class="col s3 ">
-<a categoryid="109" class="categoryButton waves-effect waves-light btn-large" value="statecapitals" href="game/109">State Capitals</a></div>
-<div class="col s3 ">
-<a categoryid="21" class="categoryButton waves-effect waves-light btn-large" value="animals" href="game/21">Animals</a></div>
-<div class="col s3 ">
-<a categoryid="440" class="categoryButton waves-effect waves-light btn-large" value="thehumanbody" href="game/440">The Human Body</a></div>
-    
-</div>
+    <div class="row">
+        <div class="col s3 ">
+            <a style="display: none;" categoryid="218" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="scienceandnature"
+                href="game/218">Science and Nature</a>
+        </div>
+        <div class="col s3 ">
+            <a id="statecapitals" style="display: none;" categoryid="109" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="statecapitals" href="game/109">State Capitals</a>
+        </div>
+        <div class="col s3 ">
+            <a id="animals" style="display: none;" categoryid="21" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="animals" href="game/21">Animals</a>
+        </div>
+        <div class="col s3 ">
+            <a style="display: none;" categoryid="440" class="hidden fadeButton categoryButton waves-effect waves-light btn-large" value="thehumanbody" href="game/440">The Human Body</a>
+        </div>
+
+    </div>
 
 </div>
+<script>
+    $(function () {
+        $(".fadeButton").hide(1);
+        var audio = new Audio('/assets/audio/boardfill.mp3');
+        audio.play();
+        $(".fadeButton").fadeIn(3000); 
+
+
+    });
+
+</script>
