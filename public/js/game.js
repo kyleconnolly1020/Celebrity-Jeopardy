@@ -284,14 +284,12 @@ $(function () {
         return newarray1.join(' ');
     }
 
-
+// Answer Validation
     function checkAnswer(userAnswer, storedAnswer, questionIdString) {
-        // console.log(userAnswer);
-        // console.log(storedAnswer);
+  
         var formattedAnswer = userAnswer.replace(/\s+/g, "").toLowerCase();
         var storedFormatted = storedAnswer.replace(/\s+/g, "").toLowerCase();
-        // console.log(formattedAnswer);
-        // console.log(storedFormatted);
+
         if(formattedAnswer.includes("the")){
             formattedAnswer = formattedAnswer.replace("the", "");
         }
@@ -311,10 +309,8 @@ $(function () {
             storedFormatted = storedFormatted.replace("</i>", "");
         }
 
-        // console.log(formattedAnswer);
-        // console.log(storedFormatted);
         var storedFormatted = storedFormatted.replace(/[^a-zA-Z_0-9-]/g, "");
-        // console.log(storedFormatted);
+
         if (formattedAnswer === storedFormatted) {
             $(questionIdString).attr("correct", "true");
             var points = parseInt($(questionIdString).text());
