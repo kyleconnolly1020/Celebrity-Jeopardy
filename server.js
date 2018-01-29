@@ -32,8 +32,21 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+
+if(process.env.NODE_ENV === "production"){
+  app.use(function(req, res, next){
+    console.log("From the server", req.header('x-forwarded-proto'));
+    if (req.header('x-forwarded-proto') === 'https')
+          res.redirect(`http://${req.header('host')}${req.url}`)
+        else
+          next();
+      });
+}
+
 // Static directory
 app.use(express.static("public"));
+
+
 
 
 // =============================================================
