@@ -7,6 +7,7 @@ $(document).ready(function () {
 
     $("#subUser").click(function (e) {
         e.preventDefault();
+        // get last element of the url
         var userID = window.location.pathname.split("/").pop();
         var hbuser = {
             contestant_name: $(".new-item").val(),

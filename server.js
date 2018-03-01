@@ -32,6 +32,16 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+
+if(process.env.NODE_ENV === "production"){
+  app.use(function(req, res, next){
+    if (req.header('x-forwarded-proto') === 'https')
+          res.redirect(`http://${req.header('host')}${req.url}`)
+        else
+          next();
+      });
+}
+
 // Static directory
 app.use(express.static("public"));
 
@@ -39,7 +49,7 @@ app.use(express.static("public"));
 // =============================================================
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
-// require("./routes/post-api-routes.js")(app);
+
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================

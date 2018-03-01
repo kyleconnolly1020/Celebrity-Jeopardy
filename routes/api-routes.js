@@ -13,7 +13,6 @@ module.exports = function (app) {
         limit: [10],
         order: [["earnings", "DESC"]]
       }).then(function (data) {
-        // We have access to the todos as an argument inside of the callback function
         res.render("leaderboard", { leaderboard: data });
       });
     } else {
